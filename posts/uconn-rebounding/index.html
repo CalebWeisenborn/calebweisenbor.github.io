@@ -371,6 +371,74 @@ dbl (32): Rk, G, TW, TL, W-L%, SRS, SOS, CW, CL, HW, HL, AW, AL, Tm., Opp., ...
 <p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>As you can see, UCONN was incredible at rebounding the ball. What is intriguing about this data is that offensive rebounds are more difficult to grab then defensive rebounds, but yet UCONN ranked higher offensively than defensively.</p>
+<p>I mentioned earlier the size, strength, and athleticism of the Huskies. Players such as Adama Sanogo, Alek Karaban, and Donovan Clingan resembled the Monstars from the movie Space Jam. Tristen Newton, Jordan Hawkins, and Andre Jackson were all tall, lengthy, athletic guards who helped on long rebounds.</p>
+<p>This begs the question of, who was the most dominant rebounder of the national champions?</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>players <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/players23.csv"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(MP <span class="sc">&gt;</span> <span class="dv">50</span> <span class="sc">&amp;</span> TRB <span class="sc">&gt;</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 5681 Columns: 59
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (10): Team, Player, Class, Pos, Height, Hometown, High School, Summary, ...
+dbl (49): #, Weight, Rk.x, G, GS, MP, FG, FGA, FG%, 2P, 2PA, 2P%, 3P, 3PA, 3...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>connp <span class="ot">&lt;-</span> players <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Team <span class="sc">==</span> <span class="st">"UConn Huskies Men's"</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>as <span class="ot">&lt;-</span> connp <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Player <span class="sc">==</span> <span class="st">"Adama Sanogo"</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>jw <span class="ot">&lt;-</span> connp <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Player <span class="sc">==</span> <span class="st">"Jordan Hawkins"</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>tn <span class="ot">&lt;-</span> connp <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Player <span class="sc">==</span> <span class="st">"Tristen Newton"</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>ak <span class="ot">&lt;-</span> connp <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Player <span class="sc">==</span> <span class="st">"Alex Karaban"</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>dc <span class="ot">&lt;-</span> connp <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Player <span class="sc">==</span> <span class="st">"Donovan Clingan"</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>aj <span class="ot">&lt;-</span> connp <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Player <span class="sc">==</span> <span class="st">"Andre Jackson"</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>jc <span class="ot">&lt;-</span> connp <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Player <span class="sc">==</span> <span class="st">"Joey Calcaterra"</span>)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>na <span class="ot">&lt;-</span> connp <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Player <span class="sc">==</span> <span class="st">"Nahiem Alleyne"</span>)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>hd <span class="ot">&lt;-</span> connp <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Player <span class="sc">==</span> <span class="st">"Hassan Diarra"</span>)</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>players, <span class="fu">aes</span>(<span class="at">x=</span>DRB, <span class="at">y=</span>ORB), <span class="at">color=</span><span class="st">"grey"</span>) <span class="sc">+</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>connp, <span class="fu">aes</span>(<span class="at">x=</span>DRB, <span class="at">y=</span>ORB ), <span class="at">color=</span><span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_text</span>(<span class="at">data=</span>as, <span class="fu">aes</span>(<span class="at">x=</span>DRB, <span class="at">y=</span>ORB<span class="sc">+</span><span class="dv">5</span> , <span class="at">label=</span>Player)) <span class="sc">+</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data=</span>jw, <span class="fu">aes</span>(<span class="at">x=</span>DRB, <span class="at">y=</span>ORB , <span class="at">label=</span>Player)) <span class="sc">+</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_text</span>(<span class="at">data=</span>tn, <span class="fu">aes</span>(<span class="at">x=</span>DRB, <span class="at">y=</span>ORB , <span class="at">label=</span>Player)) <span class="sc">+</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_text</span>(<span class="at">data=</span>dc, <span class="fu">aes</span>(<span class="at">x=</span>DRB, <span class="at">y=</span>ORB<span class="sc">+</span><span class="dv">5</span> , <span class="at">label=</span>Player)) <span class="sc">+</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_text</span>(<span class="at">data=</span>aj, <span class="fu">aes</span>(<span class="at">x=</span>DRB, <span class="at">y=</span>ORB , <span class="at">label=</span>Player)) <span class="sc">+</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data=</span>ak, <span class="fu">aes</span>(<span class="at">x=</span>DRB, <span class="at">y=</span>ORB , <span class="at">label=</span>Player)) <span class="sc">+</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_text</span>(<span class="at">data=</span>jc, <span class="fu">aes</span>(<span class="at">x=</span>DRB<span class="sc">+</span><span class="dv">30</span>, <span class="at">y=</span>ORB , <span class="at">label=</span>Player)) <span class="sc">+</span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_text</span>(<span class="at">data=</span>na, <span class="fu">aes</span>(<span class="at">x=</span>DRB<span class="dv">-5</span>, <span class="at">y=</span>ORB<span class="sc">+</span><span class="dv">7</span> , <span class="at">label=</span>Player)) <span class="sc">+</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_text</span>(<span class="at">data=</span>hd, <span class="fu">aes</span>(<span class="at">x=</span>DRB, <span class="at">y=</span>ORB<span class="dv">-7</span> , <span class="at">label=</span>Player)) <span class="sc">+</span></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Adama Sanogo is a beast"</span>, <span class="at">subtitle=</span><span class="st">"He lead the national champions in rebounding, by a pretty far margin."</span>, <span class="at">x=</span><span class="st">"Defensive Rebounds"</span>, <span class="at">y=</span><span class="st">"Offensive Rebounds"</span>) <span class="sc">+</span> </span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>), </span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>), </span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Adama Sanogo is the shortest of the three big men from Connecticut, but yet led the team in offensive and defensive rebounds. Sanogo was elite at boxing out, and breaking his opponents box outs, largely due to his 246 pound frame.</p>
+<p>You would expect the individual numbers to pop off the page considering as a team they were top 3 in the country in total rebounds. However, the rebound counts are relatively spread out, meaning that were just all around a good rebounding team.</p>
+<p>With these rebound numbers, you gain 2nd chance opportunities for points and limit 2nd chance opportunities for opponents. Usually if you win the rebound battle, you have a pretty good chance at winning the game. Let’s take a look at how the Huskies did vs their opponents as far as rebounds.</p>
 
 
 
